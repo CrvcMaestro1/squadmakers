@@ -4,3 +4,4 @@ venv/
 .localhost.env
 .idea
 __pycache__/
+static/
