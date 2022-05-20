@@ -14,6 +14,10 @@
 
 `python manage.py migrate`
 
+### Collectstatics
+
+`python manage.py collectstatic --no-input`
+
 ### Execute tests
 
 `pytest`
@@ -36,7 +40,9 @@ After build, run tests `docker-compose run --rm test`
 
 ### Swagger YAML collection
 
-swagger.yaml
+File: swagger.yaml
+
+[Docs](http://127.0.0.1:8000/)
 
 ## Other questions
 
