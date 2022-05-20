@@ -4,26 +4,26 @@ info:
   version: 1.0.0
   description: Endpoints
 servers:
-  - url: http://127.0.0.1:8000/api
+  - url: http://127.0.0.1:8000
     description: URL
 tags:
-- name: "joke"
-  description: "Get Jokes from APIs"
-- name: "crud_joke"
-  description: "Get, Post, Put, Delete Joke"
-- name: "mathematical"
-  description: "Mathematical"
+  - name: "joke"
+    description: "Get Jokes from APIs"
+  - name: "crud_joke"
+    description: "Get, Post, Put, Delete Joke"
+  - name: "mathematical"
+    description: "Mathematical"
 paths:
   /api/get-joke:
     get:
       operationId: api_get_joke_retrieve
       description: ''
       tags:
-      - joke
+        - joke
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           description: No response body
@@ -32,17 +32,17 @@ paths:
       operationId: api_get_joke_retrieve_2
       description: ''
       parameters:
-      - in: path
-        name: joke_type
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: joke_type
+          schema:
+            type: string
+          required: true
       tags:
-      - joke
+        - joke
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           description: No response body
@@ -51,11 +51,11 @@ paths:
       operationId: api_joke_retrieve
       description: ''
       tags:
-      - crud_joke
+        - crud_joke
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           content:
@@ -67,7 +67,7 @@ paths:
       operationId: api_joke_create
       description: ''
       tags:
-      - crud_joke
+        - crud_joke
       requestBody:
         content:
           application/json:
@@ -81,9 +81,9 @@ paths:
               $ref: '#/components/schemas/Joke'
         required: true
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           content:
@@ -96,17 +96,17 @@ paths:
       operationId: api_joke_retrieve_2
       description: ''
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       tags:
-      - crud_joke
+        - crud_joke
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           content:
@@ -118,13 +118,13 @@ paths:
       operationId: api_joke_update_2
       description: ''
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       tags:
-      - crud_joke
+        - crud_joke
       requestBody:
         content:
           application/json:
@@ -138,9 +138,9 @@ paths:
               $ref: '#/components/schemas/Joke'
         required: true
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           content:
@@ -152,17 +152,17 @@ paths:
       operationId: api_joke_destroy_2
       description: ''
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       tags:
-      - crud_joke
+        - crud_joke
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '204':
           description: No response body
@@ -181,11 +181,11 @@ paths:
             example-numbers:
               value: "1,2,3,4"
       tags:
-      - mathematical
+        - mathematical
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           description: No response body
@@ -204,11 +204,11 @@ paths:
             example-number:
               value: "20"
       tags:
-      - mathematical
+        - mathematical
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+        - { }
       responses:
         '200':
           description: No response body
@@ -221,7 +221,7 @@ components:
           type: string
           maxLength: 256
       required:
-      - text
+        - text
   securitySchemes:
     basicAuth:
       type: http
