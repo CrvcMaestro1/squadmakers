@@ -38,4 +38,7 @@ After build, run tests `docker-compose run --rm test`
 
 swagger.yaml
 
+## Other questions
+
+The second part of the questions in the file questions.md
 
