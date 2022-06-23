@@ -6,17 +6,17 @@ on:
 
 env:
   # Postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: admin
-  POSTGRES_DB: squadmakers_test
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
   # Django
-  SSL_REQUIRED: 0
-  DATABASE_URL: postgres://postgres:admin@localhost:5432/squadmakers_test
-  ENGINE: django.db.backends.postgresql_psycopg2
-  SECRET_KEY: le2al8t@ocsxvu2#67-3&68*0=gl9utf1h5u$1@g0b6!0$hb-5
-  DEBUG: 0
-  ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
-  TIME_ZONE: America/Guayaquil
+  SSL_REQUIRED: ${{ secrets.SSL_REQUIRED }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  ENGINE: ${{ secrets.ENGINE }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DEBUG: ${{ secrets.DEBUG }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  TIME_ZONE: ${{ secrets.TIME_ZONE }}
 
 jobs:
 
