@@ -13,23 +13,28 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  test:
+  build:
     runs-on: ubuntu-18.04
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: db
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     env:
-      # Django vars
       SSL_REQUIRED: 0
       DATABASE_URL: postgres://postgres:admin@db:5432/squadmakers_test
       ENGINE: django.db.backends.postgresql_psycopg2
-      SECRET_KEY: YOURK_KEY
+      SECRET_KEY: le2al8t@ocsxvu2#67-3&68*0=gl9utf1h5u$1@g0b6!0$hb-5
       DEBUG: 0
       ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
       TIME_ZONE: America/Guayaquil
-      # Postgres vars docker
-      POSTGRES_DB: squadmakers_test
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      HOST: db
-      PORT: 5432
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.7
@@ -41,6 +46,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Set up Postgres
+        with:
+          postgresql version: 11
       - name: Run Tests
         run: |
           pytest
+      - name: Run Migrations
+        run: python manage.py migrate
