@@ -21,13 +21,13 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: admin
-          POSTGRES_DB: db
+          POSTGRES_DB: squadmakers_test
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       SSL_REQUIRED: 0
-      DATABASE_URL: postgres://postgres:admin@db:5432/squadmakers_test
+      DATABASE_URL: postgres://postgres:admin@localhost:5432/squadmakers_test
       ENGINE: django.db.backends.postgresql_psycopg2
       SECRET_KEY: le2al8t@ocsxvu2#67-3&68*0=gl9utf1h5u$1@g0b6!0$hb-5
       DEBUG: 0
