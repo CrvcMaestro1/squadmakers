@@ -78,6 +78,3 @@ jobs:
         uses: jtalk/url-health-check-action@v2
         with:
           url: http://127.0.0.1:8000/
-      - name: Stop App
-        run: |
-          fg
