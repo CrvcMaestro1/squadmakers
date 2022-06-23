@@ -73,8 +73,11 @@ jobs:
           python manage.py migrate
       - name: Start App
         run: |
-          python manage.py runserver 8000
+          nohup python manage.py runserver 8000 &
       - name: Check Deployed App
         uses: jtalk/url-health-check-action@v2
         with:
           url: http://127.0.0.1:8000/
+      - name: Stop App
+        run: |
+          fg
