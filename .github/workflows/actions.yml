@@ -4,7 +4,22 @@ on:
   push:
     branches: [ main ]
 
+env:
+  # Postgres
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  # Django
+  SSL_REQUIRED: ${{ secrets.SSL_REQUIRED }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  ENGINE: ${{ secrets.ENGINE }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DEBUG: ${{ secrets.DEBUG }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  TIME_ZONE: ${{ secrets.TIME_ZONE }}
+
 jobs:
+
   skip_reduncy:
     runs-on: ubuntu-18.04
     steps:
@@ -13,26 +28,8 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  build:
+  test:
     runs-on: ubuntu-18.04
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: admin
-          POSTGRES_DB: squadmakers_test
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    env:
-      SSL_REQUIRED: 0
-      DATABASE_URL: postgres://postgres:admin@localhost:5432/squadmakers_test
-      ENGINE: django.db.backends.postgresql_psycopg2
-      SECRET_KEY: le2al8t@ocsxvu2#67-3&68*0=gl9utf1h5u$1@g0b6!0$hb-5
-      DEBUG: 0
-      ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
-      TIME_ZONE: America/Guayaquil
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.7
@@ -47,6 +44,30 @@ jobs:
       - name: Run Tests
         run: |
           pytest
+
+  build:
+    runs-on: ubuntu-18.04
+    services:
+      postgres:
+        image: postgres:10-alpine
+        env:
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+          POSTGRES_DB: $POSTGRES_DB
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v3
+        with:
+          cache: "pip"
+          python-version: 3.7
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run Migrations
         run: |
           python manage.py migrate
