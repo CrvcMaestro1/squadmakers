@@ -35,6 +35,9 @@ jobs:
       DEBUG: 0
       ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
       TIME_ZONE: America/Guayaquil
+
+
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.7
@@ -53,4 +56,5 @@ jobs:
         run: |
           pytest
       - name: Run Migrations
-        run: python manage.py migrate
+        run: |
+          python manage.py migrate
