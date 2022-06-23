@@ -11,7 +11,7 @@ env:
   POSTGRES_DB: squadmakers_test
   # Django
   SSL_REQUIRED: 0
-  DATABASE_URL: postgres://postgres:admin@localhost:5433/squadmakers_test
+  DATABASE_URL: postgres://postgres:admin@localhost:5432/squadmakers_test
   ENGINE: django.db.backends.postgresql_psycopg2
   SECRET_KEY: le2al8t@ocsxvu2#67-3&68*0=gl9utf1h5u$1@g0b6!0$hb-5
   DEBUG: 0
